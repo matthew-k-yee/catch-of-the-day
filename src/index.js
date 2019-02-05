@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import StorePicker from './components/StorePicker'
-import App from './components/App'
+import ReactRouter from './components/ReactRouter'
 import './css/style.css'
 
-ReactDOM.render(<App />, document.querySelector('#main'));
+ReactDOM.render(<ReactRouter />, document.querySelector('#main'));

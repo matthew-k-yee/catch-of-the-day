@@ -4,11 +4,14 @@ import Inventory from './Inventory'
 import Order from './Order'
 
 class App extends React.Component {
+  constructor(props){
+    super(props)
+  }
   render() {
     return (
       <div className="catch-of-the-day">
         <div className="menu">
-          <Header />
+          <Header tagline="Fresh Seafood Market"/>
         </div>
         <Order />
         <Inventory />

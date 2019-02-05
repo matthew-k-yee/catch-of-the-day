@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Header extends Component {
-  render() {
-    return (
+const Header = props => (
       <header className="top">
         <h1>
         Catch 
@@ -13,11 +11,9 @@ class Header extends Component {
         Day
         </h1>
         <h3 className="tagline">
-        <span>Fresh Daily</span>
+        <span>{props.tagline}</span>
       </h3>
       </header>
     )
-  }
-}
 
 export default Header

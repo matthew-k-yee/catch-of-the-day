@@ -13,11 +13,22 @@ class App extends React.Component {
   };
 
   componentDidMount() {
+    //reinstate local storage
+    const localStorageRef = localStorage.getItem(this.props.match.params.storeId)
+    if (localStorageRef) {
+      this.setState({
+        order: JSON.parse(localStorageRef)
+      })
+    }
     const {params} = this.props.match 
     this.ref = base.syncState(`${params.storeId}/fishes`, {
       context: this, 
       state: 'fishes'
     })
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem(this.props.match.params.storeId, JSON.stringify(this.state.order))
   }
 
   componentWillUnmount() {
@@ -35,6 +46,29 @@ class App extends React.Component {
     console.log(fishes)
   }
 
+  updateFish = (key, updateFish) => {
+    const fishes = {...this.state.fishes}
+    fishes[key] = updateFish
+    this.setState({
+      fishes: fishes
+    })
+  }
+
+  deleteFish = (key) => {
+    const fishes = {...this.state.fishes} 
+    fishes[key] = null;
+    this.setState({
+      fishes: fishes
+    })
+  }
+
+  removeFromOrder = key => {
+    const order = {...this.state.order}
+    delete order[key]
+    this.setState({
+      order: order
+    })
+  }
   loadSamples = () => {
     this.setState({
       fishes: sampleFishes
@@ -67,9 +101,12 @@ class App extends React.Component {
               />))}
           </ul>
         </div>
-        <Order fishes={this.state.fishes} order={this.state.order}/>
+        <Order fishes={this.state.fishes} order={this.state.order} removeFromOrder={this.removeFromOrder}/>
         <Inventory addFish={this.addFish}
                    loadSamples={this.loadSamples}
+                   fishes={this.state.fishes}
+                   updateFish={this.updateFish}
+                   deleteFish={this.deleteFish}
         />
       </div>
     )

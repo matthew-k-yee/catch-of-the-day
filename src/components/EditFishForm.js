@@ -1,7 +1,19 @@
 import React from 'react'
 import { formatPrice } from '../helpers'
+import PropTypes from 'prop-types'
 
 class EditFishForm extends React.Component {
+  static propTypes = {
+    fish: PropTypes.shape({
+      image: PropTypes.string,
+      name: PropTypes.string,
+      desc: PropTypes.string,
+      status: PropTypes.string,
+      price: PropTypes.number,
+    }),
+    index: PropTypes.string,
+    updateFish: PropTypes.func,
+  }
   handleChange = e => {
     //update that fish
     //take a copy of the edit fish

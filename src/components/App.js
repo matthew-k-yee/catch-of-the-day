@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Header from './Header'
 import Inventory from './Inventory'
 import Order from './Order'
@@ -11,6 +12,10 @@ class App extends React.Component {
     fishes: {}, 
     order: {}
   };
+
+  static propTypes = {
+    match: PropTypes.object
+  }
 
   componentDidMount() {
     //reinstate local storage
@@ -69,6 +74,7 @@ class App extends React.Component {
       order: order
     })
   }
+  
   loadSamples = () => {
     this.setState({
       fishes: sampleFishes
@@ -107,6 +113,7 @@ class App extends React.Component {
                    fishes={this.state.fishes}
                    updateFish={this.updateFish}
                    deleteFish={this.deleteFish}
+                   storeId={this.props.match.params.storeId}
         />
       </div>
     )
